@@ -1,0 +1,136 @@
+.sectors__grid {
+  margin-top: clamp(48px, 7vw, 96px);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(14px, 1.6vw, 24px);
+}
+.sector-card {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  display: flex; flex-direction: column;
+  min-height: 420px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(600px circle at var(--mx) var(--my), rgba(255, 106, 19, 0.08), transparent 45%),
+    linear-gradient(180deg, var(--c-surface) 0%, var(--c-bg-2) 100%);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: border-color 0.5s var(--ease-out);
+}
+.sector-card::before {
+  /* blueprint grid */
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--c-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, #000 0%, transparent 80%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.sector-card:hover { border-color: var(--c-line-strong); }
+
+.sector-card--industrial { grid-column: span 7; }
+.sector-card--commercial { grid-column: span 5; }
+.sector-card--residential { grid-column: span 5; }
+.sector-card--governmental { grid-column: span 7; }
+
+.sector-card__media {
+  position: relative;
+  flex: 1;
+  display: grid; place-items: end center;
+  padding: 28px 24px 0;
+}
+.sector-card__media svg { width: 100%; height: auto; max-height: 360px; overflow: visible; }
+
+.sector-card__body {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 18px;
+  align-items: baseline;
+  padding: 22px 26px 26px;
+  border-top: 1px solid var(--c-line);
+  background: rgba(10, 12, 15, 0.4);
+}
+.sector-card__num {
+  grid-row: span 2;
+  font-family: var(--f-mono);
+  font-size: var(--fs-xs);
+  color: var(--c-accent);
+}
+.sector-card__title {
+  font-family: var(--f-display);
+  font-size: clamp(1.6rem, 1rem + 1.6vw, 2.4rem);
+  font-weight: 800;
+  font-stretch: 118%;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.sector-card__text { margin-top: 6px; color: var(--c-muted); font-size: var(--fs-sm); }
+
+/* ---------- Illustration primitives (see scripts/illustrations) ---------- */
+.ill { --draw: 1; }
+.ill .l {
+  fill: none;
+  stroke: var(--c-blue);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--draw);
+}
+.no-motion .ill .l { stroke-dashoffset: 0; }
+.ill .l--soft { stroke: var(--c-line-strong); }
+.ill .l--accent { stroke: var(--c-accent); }
+.ill .l--thick { stroke-width: 2; }
+.ill .f { fill: var(--c-surface-2); opacity: 0; transition: opacity 1s var(--ease-out); }
+.ill .f--glass { fill: url(#ill-glass); }
+.ill .f--dark { fill: #0e141b; }
+.ill .f--accent { fill: var(--c-accent); }
+.ill .lit { fill: var(--c-accent-2); opacity: 0; }
+.ill .dim-txt {
+  font-family: var(--f-mono); font-size: 8px; letter-spacing: 0.08em;
+  fill: var(--c-dim); opacity: 0; transition: opacity 0.8s 1.2s;
+}
+.ill.is-drawn .f { opacity: 1; }
+.ill.is-drawn .f--soft { opacity: 0.5; }
+.ill.is-drawn .dim-txt { opacity: 1; }
+.ill.is-drawn .lit { animation: lit 4s var(--d, 0s) ease-in-out infinite; }
+@keyframes lit {
+  0%, 100% { opacity: 0.15; }
+  40%, 70% { opacity: 0.9; }
+}
+
+/* living details */
+.ill .smoke { fill: var(--c-muted); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.ill.is-drawn .smoke { animation: smoke 5s var(--d, 0s) ease-out infinite; }
+@keyframes smoke {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.4); }
+  20% { opacity: 0.35; }
+  100% { opacity: 0; transform: translate(26px, -70px) scale(2.4); }
+}
+.ill .flag { transform-box: fill-box; transform-origin: left center; }
+.ill.is-drawn .flag { animation: flag 2.4s ease-in-out infinite; }
+@keyframes flag {
+  0%, 100% { transform: skewY(0deg) scaleX(1); }
+  50% { transform: skewY(-6deg) scaleX(0.92); }
+}
+.ill .beacon { fill: var(--c-accent); }
+.ill.is-drawn .beacon { animation: beacon 1.6s steps(2) infinite; }
+@keyframes beacon { 50% { opacity: 0.1; } }
+.ill .sway { transform-box: fill-box; transform-origin: bottom center; }
+.ill.is-drawn .sway { animation: sway 5s ease-in-out infinite; }
+@keyframes sway { 50% { transform: rotate(2.5deg); } }
+
+@media (max-width: 900px) {
+  .sector-card,
+  .sector-card--industrial,
+  .sector-card--commercial,
+  .sector-card--residential,
+  .sector-card--governmental { grid-column: 1 / -1; min-height: 0; }
+}

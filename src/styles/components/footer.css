@@ -1,0 +1,41 @@
+.site-footer {
+  position: relative;
+  padding-top: 48px;
+  border-top: 1px solid var(--c-line);
+  overflow: hidden;
+}
+.site-footer__inner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;
+}
+.site-footer__brand { display: flex; align-items: center; gap: 14px; }
+.site-footer__brand .kaid-mark { width: 38px; height: 38px; }
+.site-footer__brand strong { display: block; font-stretch: 112%; letter-spacing: 0.02em; }
+.site-footer__brand span {
+  display: block; margin-top: 2px;
+  font-family: var(--f-mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--c-muted);
+}
+.site-footer__link {
+  display: inline-block;
+  font-family: var(--f-mono); font-size: var(--fs-sm); letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--c-line-strong);
+  padding-bottom: 4px;
+  transition: color 0.3s, border-color 0.3s;
+}
+.site-footer__link:hover { color: var(--c-accent); border-color: var(--c-accent); }
+.site-footer__legal { font-family: var(--f-mono); font-size: 0.66rem; letter-spacing: 0.08em; color: var(--c-dim); }
+
+.site-footer__giant {
+  margin-top: 40px;
+  font-family: var(--f-display);
+  font-size: 34vw;
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 0.72;
+  letter-spacing: -0.06em;
+  text-align: center;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--c-line-strong);
+  user-select: none;
+  translate: 0 12%;
+}

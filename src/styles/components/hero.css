@@ -1,0 +1,149 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex; align-items: center;
+  padding-block: calc(var(--header-h) + 40px) 120px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* 3D stage */
+.hero__stage { position: absolute; inset: 0; z-index: -1; }
+.hero__canvas { width: 100%; height: 100%; }
+.hero__vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 70% at 70% 45%, transparent 0%, rgba(10, 12, 15, 0.25) 60%, var(--c-bg) 100%),
+    linear-gradient(90deg, rgba(10, 12, 15, 0.85) 0%, rgba(10, 12, 15, 0.2) 55%, transparent 100%),
+    linear-gradient(0deg, var(--c-bg) 0%, transparent 22%);
+}
+.hero.no-webgl .hero__stage {
+  background:
+    linear-gradient(var(--c-line) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, var(--c-line) 1px, transparent 1px) 0 0 / 64px 64px;
+}
+
+.hero__inner { position: relative; }
+
+.hero__title {
+  margin-top: 26px;
+  font-family: var(--f-display);
+  font-size: var(--fs-hero);
+  font-weight: 900;
+  font-stretch: 118%;
+  line-height: 0.84;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+.hero__title .line { display: block; overflow: hidden; padding-bottom: 0.04em; }
+.hero__title .line__inner { display: block; }
+
+.hero__lede {
+  margin-top: 30px;
+  max-width: 40ch;
+  font-size: var(--fs-lg);
+  line-height: 1.45;
+  color: var(--c-muted);
+}
+
+/* Countdown */
+.countdown {
+  margin-top: 44px;
+  display: inline-grid;
+  grid-template-columns: repeat(4, auto);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  background: rgba(13, 17, 22, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.countdown__unit {
+  display: grid; gap: 6px;
+  padding: 16px clamp(14px, 2.2vw, 28px);
+}
+.countdown__unit + .countdown__unit { border-left: 1px solid var(--c-line); }
+.countdown__num {
+  font-family: var(--f-display);
+  font-size: clamp(1.7rem, 1rem + 2.2vw, 2.8rem);
+  font-weight: 700;
+  font-stretch: 110%;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.countdown__num.is-tick { animation: tick 0.5s var(--ease-out); }
+@keyframes tick {
+  from { opacity: 0.2; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+.countdown__lbl {
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-dim);
+}
+.countdown.is-live .countdown__num { color: var(--c-accent); }
+
+/* HUD */
+.hero__hud {
+  position: absolute;
+  right: var(--gutter); bottom: 48px;
+  display: grid; gap: 8px;
+  min-width: 230px;
+  padding: 16px 18px;
+  border: 1px solid var(--c-line);
+  border-left: 2px solid var(--c-accent);
+  background: rgba(13, 17, 22, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: var(--f-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.hud-row { display: flex; justify-content: space-between; gap: 24px; }
+.hud-k { color: var(--c-dim); }
+.hud-v { color: var(--c-text); font-variant-numeric: tabular-nums; }
+.hud-v--accent { color: var(--c-accent); }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute; left: var(--gutter); bottom: 40px;
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: var(--f-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.scroll-cue i {
+  position: relative; width: 1px; height: 46px; overflow: hidden;
+  background: var(--c-line-strong);
+}
+.scroll-cue i::after {
+  content: ''; position: absolute; left: 0; top: 0; width: 1px; height: 40%;
+  background: var(--c-accent);
+  animation: cue 1.8s var(--ease-in-out) infinite;
+}
+@keyframes cue {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(260%); }
+}
+
+@media (max-width: 900px) {
+  .hero { align-items: flex-end; padding-bottom: 170px; }
+  .hero__vignette {
+    background:
+      linear-gradient(0deg, var(--c-bg) 8%, rgba(10, 12, 15, 0.6) 50%, rgba(10, 12, 15, 0.1) 100%);
+  }
+  .hero__hud { left: var(--gutter); right: var(--gutter); bottom: 32px; min-width: 0; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .hud-row { flex-direction: column; gap: 4px; }
+  .scroll-cue { display: none; }
+}
+@media (max-width: 520px) {
+  .countdown { display: grid; width: 100%; }
+  .countdown__unit { padding: 14px 10px; }
+  .hero__hud { font-size: 0.62rem; padding: 12px 14px; }
+}

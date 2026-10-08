@@ -1,0 +1,73 @@
+.preloader {
+  position: fixed; inset: 0; z-index: 950;
+  display: grid; place-items: center;
+  background: var(--c-bg);
+  color: var(--c-text);
+  clip-path: inset(0 0 0 0);
+}
+.preloader__grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--c-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center;
+  mask-image: radial-gradient(circle at center, #000 0%, transparent 70%);
+  opacity: 0.7;
+}
+.preloader__center {
+  position: relative;
+  display: grid; justify-items: center; gap: 22px;
+}
+.preloader__mark { width: 72px; height: 72px; }
+.preloader__mark [pathLength] {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1.4s var(--ease-in-out) forwards;
+}
+.preloader__mark [pathLength]:nth-child(2) { animation-delay: 0.35s; }
+.preloader__mark [pathLength]:nth-child(3) { animation-delay: 0.55s; }
+.preloader__mark [pathLength]:nth-child(4) { animation-delay: 0.7s; }
+.preloader__mark .kaid-mark__node {
+  transform-origin: 15px 24px;
+  transform: scale(0);
+  animation: pop 0.5s 1s var(--ease-out) forwards;
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes pop { to { transform: scale(1); } }
+
+.preloader__label {
+  font-family: var(--f-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.preloader__foot {
+  position: absolute; left: var(--gutter); right: var(--gutter); bottom: 36px;
+  display: flex; justify-content: space-between; align-items: end;
+  font-family: var(--f-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  color: var(--c-muted);
+}
+.preloader__foot > span:last-child {
+  font-family: var(--f-display);
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 800;
+  font-stretch: 125%;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: var(--c-text);
+  font-variant-numeric: tabular-nums;
+}
+.preloader__bar {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: var(--c-line);
+}
+.preloader__bar span {
+  display: block; height: 100%; width: 100%;
+  background: var(--c-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+}

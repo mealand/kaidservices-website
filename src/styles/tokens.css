@@ -1,0 +1,41 @@
+:root {
+  /* Colour */
+  --c-bg: #0a0c0f;
+  --c-bg-2: #0d1116;
+  --c-surface: #121820;
+  --c-surface-2: #182029;
+  --c-line: rgba(143, 184, 214, 0.13);
+  --c-line-strong: rgba(143, 184, 214, 0.3);
+  --c-text: #e8ecf0;
+  --c-muted: #8a96a3;
+  --c-dim: #56616d;
+  --c-accent: #ff6a13;
+  --c-accent-2: #ffb35c;
+  --c-accent-soft: rgba(255, 106, 19, 0.14);
+  --c-blue: #8fb8d6;
+  --c-ok: #4fd1a1;
+
+  /* Type */
+  --f-display: 'Archivo', 'Arial Narrow', system-ui, sans-serif;
+  --f-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --fs-xs: 0.72rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: clamp(1.1rem, 0.9rem + 0.7vw, 1.4rem);
+  --fs-h2: clamp(2.5rem, 1.1rem + 5.4vw, 7rem);
+  --fs-hero: clamp(3.6rem, 0.6rem + 12vw, 13.5rem);
+
+  /* Space & shape */
+  --gutter: clamp(16px, 4vw, 56px);
+  --section-y: clamp(96px, 14vw, 200px);
+  --maxw: 1480px;
+  --radius: 16px;
+  --radius-sm: 8px;
+  --header-h: 76px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
