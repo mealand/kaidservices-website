@@ -24,6 +24,18 @@
 }
 .site-footer__link:hover { color: var(--c-accent); border-color: var(--c-accent); }
 .site-footer__legal { font-family: var(--f-mono); font-size: 0.66rem; letter-spacing: 0.08em; color: var(--c-dim); }
+.site-footer__credit {
+  flex-basis: 100%;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-line);
+  font-family: var(--f-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--c-dim);
+}
+.site-footer__credit strong { color: var(--c-muted); font-weight: 500; }
 
 .site-footer__giant {
   margin-top: 40px;
